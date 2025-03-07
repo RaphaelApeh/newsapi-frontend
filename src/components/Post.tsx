@@ -7,15 +7,13 @@ const Post = (props: Posts) => {
     
     return (
         <>      
-        <Link to={`posts/${props.slug}`} className="card">
+        <Link to={`posts/${props.slug}`} key={props.id} className="card">
             <img src={props.image} alt="" />
             <article>
                 <p className="entertainment-category">Entertainment</p>
-                <h1>{props.title}</h1>
+                <h3>{props.title}</h3>
                 <p>
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sequi
-                    nisi neque eum libero maiores voluptatem repudiandae quos
-                    perspiciatis, reiciendis dolor!
+                    {props.truncated_content}
                 </p>
             </article>
         </Link>

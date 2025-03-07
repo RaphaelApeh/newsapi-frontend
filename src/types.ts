@@ -9,6 +9,7 @@ export interface Posts {
     user: User
     id: number
     title : string
+    truncated_content: string
     content: string
     slug: string
     image: string

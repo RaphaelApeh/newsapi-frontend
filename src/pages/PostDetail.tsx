@@ -15,6 +15,7 @@ export const PostDetail = ()=> {
         },
         id: 0,
         title : "",
+        truncated_content: "",
         content: "",
         slug: "",
         image: "",
