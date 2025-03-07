@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import { Posts } from "../types";
 import { BASE_API_ENDPOINT } from "../helpers/api";
 import { Link } from "react-router-dom";
-
+import NarBar from "../components/NarBar";
+import Post from "../components/Post";
 
 const Home = ()=> {
     
@@ -25,16 +26,19 @@ const Home = ()=> {
     }
     return (
         <>
-        <h1>Hello World</h1>
+        <NarBar/>   
 
-        {posts.map((post)=>(
-        <small key={post.id}>
-            Title: {post.title}
-            image: <img src={post.image} width={100} alt="" />
-            User: {post.user?.username}
-            <Link to={`posts/${post.slug}`}>Detail</Link><br/>
-        </small>)
-        )}
+        <section>
+        <div className="container">
+            <h1 className="editor-h1">Editor Picks</h1>
+            <div className="articles">
+                {posts.map((post)=>(
+                    <Post {...post} />
+                ))}
+            </div>
+
+        </div>
+    </section>
         </>
     )
 }
