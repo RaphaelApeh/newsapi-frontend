@@ -31,3 +31,8 @@ export interface UserRegister {
     password: string
     password2: string
 }
+
+export interface UserLogin {
+    username: string
+    password: string
+}
