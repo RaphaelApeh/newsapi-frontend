@@ -4,8 +4,11 @@ import Footer from "../components/Footer";
 import NarBar from "../components/NarBar";
 import { type UserRegister } from "../types";
 import { registerUser } from "../helpers/api";
+import { useNavigate } from "react-router-dom";
 
 const SignUp: React.FC = () => {
+
+    const navigate = useNavigate()
 
     const { 
         register, 
@@ -18,6 +21,7 @@ const SignUp: React.FC = () => {
 
     const onSubmit = (data: UserRegister) => {
         registerUser(data)
+        navigate("/login")
     }
 
     return (
