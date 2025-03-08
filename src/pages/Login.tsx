@@ -13,20 +13,23 @@ const Login: React.FC = () => {
         <>
         <NarBar/>
         <h1>Login</h1>    
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <label htmlFor="">Username</label>
-            <input {...register("username", {
-                required: "Username is required"
-            })} type="text" placeholder="Username" />
-            {errors.username && <p>{errors.username.message}</p>}
+        <form className="cols-3" onSubmit={handleSubmit(onSubmit)}>
+            <div className="mb-3">
+                <label htmlFor="">Username</label>
+                <input className="form-control" {...register("username", {
+                    required: "Username is required"
+                })} type="text" placeholder="Username" />
+                {errors.username && <p>{errors.username.message}</p>}
+            </div>
+            <div className="mb-3">
+                <label htmlFor="">Password</label>
+                <input className="mb-4 form-control" type="password" {...register("password", {
+                    required: "Password is required"
+                })} placeholder="Password" />
+                {errors.password && <p>{errors.password.message}</p>}
+            </div>
 
-            <label htmlFor="">Password</label>
-            <input type="password" {...register("password", {
-                required: "Password is required"
-            })} placeholder="Password" />
-            {errors.password && <p>{errors.password.message}</p>}
-
-            <button>Submit</button>
+            <button className="btn btn-success">Submit</button>
         </form>
         <Footer/>
         </>
