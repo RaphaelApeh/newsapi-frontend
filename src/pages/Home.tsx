@@ -38,7 +38,7 @@ const Home = ()=> {
             <h1 className="editor-h1">Editor Picks</h1>
             <div className="articles">
                 {loading ? posts.map((post)=>(
-                    <Post {...post} />
+                    <div key={post.id}><Post {...post} /> </div>
                 )) : <a className="card">
                     <img src="" alt="" />
             <article>

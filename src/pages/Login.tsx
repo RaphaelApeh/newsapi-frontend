@@ -3,12 +3,29 @@ import { useForm } from "react-hook-form";
 import Footer from "../components/Footer";
 import NarBar from "../components/NarBar";
 import { UserLogin } from "../types";
+import { userLogin } from "../helpers/api";
+import { useNavigate } from "react-router-dom";
+
 
 const Login: React.FC = () => {
 
-    const {register, handleSubmit, watch, formState: {errors}} = useForm<UserLogin>()
-    console.log(watch("username"))
-    const onSubmit = (data: UserLogin) => console.log(data)
+    const navigate = useNavigate()
+
+
+    const {register, handleSubmit, reset, formState: {errors}} = useForm<UserLogin>()
+
+    const onSubmit = (data: UserLogin) => {
+        if (!localStorage.getItem("access") && !localStorage.getItem("refresh")){
+            userLogin(data)
+            console.log(data)
+            reset()
+            navigate("/")
+        }else{
+            alert("error")
+        }
+
+    }
+    
     return (
         <>
         <NarBar/>
