@@ -4,6 +4,7 @@ import { About } from "./pages/About"
 import { PostDetail } from "./pages/PostDetail"
 import SignUp from "./pages/SignUp"
 import Login from "./pages/Login"
+import Logout from "./pages/Logout"
 
 function App() {
   
@@ -15,6 +16,7 @@ function App() {
         <Route path="/posts/:slug" element={<PostDetail/>} />
         <Route path="/signup" element={<SignUp/>} />
         <Route path="/login" element={<Login/>} />
+        <Route path="/logout" element={<Logout/>} />
       </Routes>
     </Router>
   )

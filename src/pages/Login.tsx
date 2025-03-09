@@ -5,12 +5,19 @@ import NarBar from "../components/NarBar";
 import { UserLogin } from "../types";
 import { userLogin } from "../helpers/api";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 
 const Login: React.FC = () => {
 
     const navigate = useNavigate()
 
+    useEffect(()=> {
+        
+        if (localStorage.getItem("access")){
+            navigate("/")
+        }
+    }, [])
 
     const {register, handleSubmit, reset, formState: {errors}} = useForm<UserLogin>()
 
