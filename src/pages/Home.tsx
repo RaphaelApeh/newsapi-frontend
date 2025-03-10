@@ -1,34 +1,29 @@
 import { useEffect, useState } from "react";
 
 import { Posts } from "../types";
-import { BASE_API_ENDPOINT } from "../helpers/api";
+import { BASE_API_ENDPOINT, getPosts } from "../helpers/api";
 
 import NarBar from "../components/NarBar";
 import Post from "../components/Post";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+import { useQuery } from "@tanstack/react-query";
 
 const Home = ()=> {
     
-    const [posts, setPosts] = useState<Posts[]>([])
-    const [loading, setloading] = useState<boolean>(true)
+    const [page, setPage] = useState(1)
 
-    useEffect(()=>{
-        getPosts()
-    }, [])
 
-    const getPosts = async ()=>{
-        try{
-            const response = await fetch(`${BASE_API_ENDPOINT}posts/`);
-            const data = await response.json()
-            setPosts(data.posts)
-            if (response.status >= 400) setloading(false)
-        }catch(error){
-            setPosts([])
-            setloading(false)
-            console.log(error)
+    const { data, isLoading } = useQuery(
+        {
+            queryKey: ["posts"],
+            queryFn: () => getPosts(page),
+            staleTime: 2000
         }
-    }
+    )
+
+    if (isLoading) return <h1>Loading ....</h1>
+
     return (
         <>
         <NarBar/>   
@@ -37,18 +32,10 @@ const Home = ()=> {
         <div className="container">
             <h1 className="editor-h1">Editor Picks</h1>
             <div className="articles">
-                {loading ? posts.map((post)=>(
+
+                {data.map((post: Posts)=>(
                     <div key={post.id}><Post {...post} /> </div>
-                )) : <a className="card">
-                    <img src="" alt="" />
-            <article>
-                <p className="entertainment-category">Error</p>
-                <h3>No Content</h3>
-                <p>
-                    404
-                </p>
-            </article>
-                    </a>}
+                )) }
             </div>
 
         </div>

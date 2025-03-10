@@ -2,6 +2,8 @@ import {Link} from 'react-router-dom'
 
 const NarBar = ()=> {
 
+    const username = localStorage.getItem("username")
+
     return (
         <>
             <nav>
@@ -20,7 +22,11 @@ const NarBar = ()=> {
 
             <div className="options">
             <Link to="/" className='current'>Home</Link>
-                <a href="./html/about.html">About</a>
+            {username ? (
+                <Link to="/logout">Logout</Link>
+            ): (
+                <Link to="/login">Login</Link>
+            )}
             </div>
         </div>
     </nav>

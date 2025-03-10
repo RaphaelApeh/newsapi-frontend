@@ -1,12 +1,18 @@
 import axios from "axios"
 import { UserLogin, UserRegister } from "../types"
 
-
 export const BASE_API_ENDPOINT: string = "http://127.0.0.1:8000/api/"
 
 export const api = axios.create({"baseURL": BASE_API_ENDPOINT, headers: {
     "Content-Type": "application/json"
 }})
+
+
+export const getPosts = async (page: number) => {
+    const response  = await api.get(`posts/?page=${page}`);
+
+    return response.data.posts
+}
 
 export const registerUser = async (data: UserRegister) => {
     try{
