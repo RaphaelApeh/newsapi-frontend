@@ -18,6 +18,46 @@ export const getPosts = async (page: number) => {
     }
 }
 
+export const createPost = async (access_token: string, data: unknown) => {
+    try{
+        const response  = await api.post("posts/", data, {
+            headers: {
+                "Authorization": `Bearer ${access_token}`
+            }
+        })
+        return response.data
+    }catch(error){
+        throw new Error("Error .....")
+    }
+}
+
+
+export const deletePost = async (slug: string, access_token: string) => {
+
+    try{
+        await api.delete(`posts/${slug}/`, {
+            headers: {
+                "Authorization": `Bearer ${access_token}`
+            }
+        })
+    }catch(error){
+        throw new Error("Error ....")
+    }
+}
+
+
+export const updatePost = async (slug: string, access_token: string, data: unknown) => {
+    try{
+        await api.put(`posts/${slug}/`, data, {
+            headers: {
+                "Authorization": `Bearer ${access_token}`
+            }
+        })
+    }catch(error){
+        throw new Error("Error ......")
+    }
+}
+
 export const getPost = async (slug: string) => {
     try{
         const response = await api.get(`posts/${slug}/`);
