@@ -9,9 +9,24 @@ export const api = axios.create({"baseURL": BASE_API_ENDPOINT, headers: {
 
 
 export const getPosts = async (page: number) => {
-    const response  = await api.get(`posts/?page=${page}`);
+    try{
+        const response  = await api.get(`posts/?page=${page}`);
 
-    return response.data.posts
+        return response.data.posts
+    }catch(error){
+        throw new Error("something went wrong :(")
+    }
+}
+
+export const getPost = async (slug: string) => {
+    try{
+        const response = await api.get(`posts/${slug}/`);
+
+        return response.data
+
+    }catch(error){
+        throw new Error("Something went wrong :(")
+    }
 }
 
 export const registerUser = async (data: UserRegister) => {

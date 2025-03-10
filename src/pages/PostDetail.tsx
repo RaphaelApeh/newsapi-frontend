@@ -1,68 +1,38 @@
-import { useParams } from "react-router-dom"
-import { BASE_API_ENDPOINT } from "../helpers/api"
-import { useEffect, useState } from "react";
-import { type Posts } from "../types";
+import { useParams } from "react-router-dom";
 import NarBar from "../components/NarBar";
 import Footer from "../components/Footer";
+import { useQuery } from "@tanstack/react-query";
+import { getPost } from "../helpers/api";
 
 
 export const PostDetail = ()=> {
 
     const { slug } = useParams()
-    const [page, setPage] = useState<Posts>({
-        user: {
-            username: "",
-            email: "",
-            get_full_name: ""
-        },
-        id: 0,
-        title : "",
-        truncated_content: "",
-        content: "",
-        slug: "",
-        image: "",
-        comments: [],
-        active: true,
-        timestamp: ""
+    
+    const { data, isPending, isLoading, isError } = useQuery({
+        queryKey: ["post"],
+        queryFn: () => getPost(String(slug)),
+        staleTime: 5000
     })
-
-    const [loading, setloading] = useState<boolean>(true)
-
-    useEffect(()=> {
     
-        getPost()
-    
-    }, [])
-
-    const getPost = async ()=>{
-        try{
-            const response = await fetch(`${BASE_API_ENDPOINT}posts/${slug}/`);
-            const data = await response.json();
-            setPage(data)
-            if (response.status >= 400) setloading(false)
-            if (loading) return <h1>No Content</h1>
-        }catch(error){
-            console.log(error)
-        }
-    
-    }
-    if (!loading) return <h1>No Content</h1>
+    if (isPending || isLoading) return <h1>Loading .....</h1>
+    if (isError) return <h1>Something went wrong :(</h1>
     return (
         <>
         <NarBar/>
-            {loading ?
+            {
             <div className="container">
             <section className="article-page">
                 <article>
-                    <img src={page.image} alt="" />
-                    <h2>{page.title}</h2>
+                    <img src={data.image} alt="" />
+                    <h2>{data.title}</h2>
                     <div>
                         <p>
-                            <i className="fas fa-user fa-1x"></i> Written By {page.user.username} {page.timestamp}
+                            <i className="fas fa-user fa-1x"></i> Written By {data.user.username} {data.timestamp}
                         </p>
                         <p className="entertainment-category">Entertainment</p>
                     </div>
-                    <p>{page.content}</p>
+                    <p>{data.content}</p>
                 </article>
     
                 <article>
@@ -84,7 +54,7 @@ export const PostDetail = ()=> {
                     <a href="#">Join Now</a>
                 </article>
             </section>
-        </div> : "No Content"}
+        </div>}
         <Footer/>
         </>
     )
