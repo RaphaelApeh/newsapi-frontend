@@ -26,7 +26,9 @@ const Login: React.FC = () => {
             userLogin(data)
             console.log(data)
             reset()
-            navigate("/")
+            setTimeout(() => {
+                navigate("/")
+            }, 3000)
         }else{
             alert("error")
         }

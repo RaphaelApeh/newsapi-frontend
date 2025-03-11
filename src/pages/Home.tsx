@@ -22,7 +22,12 @@ const Home = ()=> {
         }
     )
 
-    if (isLoading || isPending) return <h1>Loading ....</h1>
+    if (isLoading || isPending) return( 
+        <div className="preloader">
+            <div></div>
+            <div>Loading Content!</div>
+        </div>
+    )
 
     if (isError) return <h1>Something went wrong :(</h1>
 

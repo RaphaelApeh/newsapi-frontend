@@ -10,7 +10,7 @@ export const api = axios.create({"baseURL": BASE_API_ENDPOINT, headers: {
 
 export const getPosts = async (page: number) => {
     try{
-        const response  = await api.get(`posts/?page=${page}`);
+        const response  = await api.get(`posts/?posts=${page}`);
 
         return response.data.posts
     }catch(error){
@@ -60,7 +60,11 @@ export const updatePost = async (slug: string, access_token: string, data: unkno
 
 export const getPost = async (slug: string) => {
     try{
-        const response = await api.get(`posts/${slug}/`);
+        const response = await api.get(`posts/${slug}/`, {
+            headers: {
+                "Authorization": `Bearer ${localStorage.getItem("access")}`
+            }
+        });
 
         return response.data
 
