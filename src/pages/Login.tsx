@@ -56,7 +56,9 @@ const Login: React.FC = () => {
             </div>
             {mutation.isPending ? (
                 <button className="btn btn-success">Submitting ......</button>
-            ): (
+            ): mutation.isError ?(
+                <button className="btn btn-danger">Error 😡</button>
+            ) : (
                 <button className="btn btn-secondary">Submit</button>
             )}
         </form>

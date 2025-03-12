@@ -19,6 +19,7 @@ export interface Posts {
 }
 
 export interface Comment {
+    id: number
     user: User
     content: string
     timestamp: string

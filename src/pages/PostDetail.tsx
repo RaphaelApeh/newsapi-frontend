@@ -4,6 +4,7 @@ import Footer from "../components/Footer";
 import { useQuery } from "@tanstack/react-query";
 import { getPost } from "../helpers/api";
 import { useState } from "react";
+import { Comment } from "../types";
 
 
 export const PostDetail = ()=> {
@@ -26,7 +27,7 @@ export const PostDetail = ()=> {
         <div>Loading....</div>
     </div>
     )
-    if (isError) return navigate("/login")
+    if (isError) navigate("/login")
     return (
         <>
         <NarBar />
@@ -39,28 +40,29 @@ export const PostDetail = ()=> {
                         <p>
                             <i className="fas fa-user fa-1x"></i> Written By {data.user.username} {data.timestamp}
                         </p>
-                        <p className="entertainment-category">Entertainment</p>
+                        {data.can_edit_or_update ? (
+                            <>
+                            <p className="delete">Delete</p>
+                            <p className="update">Update</p>
+                            </>
+                        ): ""}
                     </div>
                     <p>{data.content}</p>
                 </article>
     
                 <article>
-                    <h3>CATEGORIES</h3>
+                    <h3>Comments</h3>
                     <ul>
-                        <li>Sports</li>
-                        <li>Entertainment</li>
-                        <li>Technology</li>
-                        <li>Fashion</li>
-                        <li>Shopping</li>
+                        {data.comments.length > 0 ? data.comments.map((comment: Comment) => 
+                        <li key={comment.id}>{comment.user.username} {">"} {comment.content}</li>
+                        ) : "No Comments"}
                     </ul>
                 </article>
     
                 <article>
-                    <h3>JOIN OUR CLUB</h3>
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit, id?
-                    </p>
-                    <a href="#">Join Now</a>
+                    <h3>Add Comment ...</h3>
+                    <input type="text" className="mb-2 form-control" />
+                    <button className="btn btn-success">Add</button>
                 </article>
             </section>
         </div>

@@ -43,6 +43,8 @@ img {
 
 .sports-category,
 .entertainment-category,
+.update,
+.delete,
 .technology-category {
   display: inline-block;
   text-transform: uppercase;
@@ -63,6 +65,13 @@ img {
 
 .technology-category {
   background-color: rgb(0, 151, 245);
+}
+
+.delete {
+  background-color: red;
+}
+.update {
+  background-color: green;
 }
 
 /* ====== Preloader ====== */
