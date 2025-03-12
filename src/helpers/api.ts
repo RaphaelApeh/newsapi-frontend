@@ -87,9 +87,10 @@ export const registerUser = async (data: UserRegister) => {
 }
 
 export const userLogin = async (data: UserLogin) => {
+
     try{
         const response = await api.post("token/", data)
-        if(response.status >= 400) throw new Error("an error orcured")
+        
         const responseData = response.data
         console.log(responseData)
         localStorage.setItem("access", responseData?.access)
@@ -98,6 +99,6 @@ export const userLogin = async (data: UserLogin) => {
         localStorage.setItem("user_id", responseData?.user_id)
     }catch(error: unknown){
         //@ts-ignore
-        throw new Error(error?.message)
+        throw new Error("........ ERROR ......")
     }
 }

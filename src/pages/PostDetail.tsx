@@ -3,12 +3,15 @@ import NarBar from "../components/NarBar";
 import Footer from "../components/Footer";
 import { useQuery } from "@tanstack/react-query";
 import { getPost } from "../helpers/api";
+import { useState } from "react";
 
 
 export const PostDetail = ()=> {
 
     const { slug } = useParams()
     
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+
     const navigate = useNavigate();
 
     const { data, isPending, isLoading, isError } = useQuery({
@@ -26,7 +29,7 @@ export const PostDetail = ()=> {
     if (isError) return navigate("/login")
     return (
         <>
-        <NarBar/>
+        <NarBar />
             <div className="container">
             <section className="article-page">
                 <article>

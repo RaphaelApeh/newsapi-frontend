@@ -33,7 +33,7 @@ const Home = ()=> {
 
     return (
         <>
-        <NarBar/>
+        <NarBar />
         <Header/>
         <section>
         <div className="container">

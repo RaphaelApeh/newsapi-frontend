@@ -1,8 +1,18 @@
+import { useEffect, useState } from 'react';
 import {Link} from 'react-router-dom'
 
-const NarBar = ()=> {
 
-    const username = localStorage.getItem("username")
+const NarBar = () => {
+
+    const [isAuthenticated, setIsAuthenticated] = useState(false)
+
+    useEffect(() => {
+         const token = localStorage.getItem("access")
+         if(token){
+            setIsAuthenticated(true)
+         }
+    }, [])
+
 
     return (
         <>
@@ -22,7 +32,7 @@ const NarBar = ()=> {
 
             <div className="options">
             <Link to="/" className='current'>Home</Link>
-            {username ? (
+            {isAuthenticated ? (
                 <Link to="/logout">Logout</Link>
             ): (
                 <Link to="/login">Login</Link>
