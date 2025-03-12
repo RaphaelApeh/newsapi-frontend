@@ -3,15 +3,12 @@ import NarBar from "../components/NarBar";
 import Footer from "../components/Footer";
 import { useQuery } from "@tanstack/react-query";
 import { getPost } from "../helpers/api";
-import { useState } from "react";
 import { Comment } from "../types";
 
 
 export const PostDetail = ()=> {
 
-    const { slug } = useParams()
-    
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const { slug } = useParams();
 
     const navigate = useNavigate();
 
