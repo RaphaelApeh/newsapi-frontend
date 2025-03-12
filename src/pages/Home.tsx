@@ -25,7 +25,7 @@ const Home = ()=> {
     if (isLoading || isPending) return( 
         <div className="preloader">
             <div></div>
-            <div>Loading Content!</div>
+            <div>Loading ....</div>
         </div>
     )
 
@@ -33,7 +33,7 @@ const Home = ()=> {
 
     return (
         <>
-        <NarBar/>   
+        <NarBar/>
         <Header/>
         <section>
         <div className="container">

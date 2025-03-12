@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import NarBar from "../components/NarBar";
 import Footer from "../components/Footer";
 import { useQuery } from "@tanstack/react-query";
@@ -9,6 +9,8 @@ export const PostDetail = ()=> {
 
     const { slug } = useParams()
     
+    const navigate = useNavigate();
+
     const { data, isPending, isLoading, isError } = useQuery({
         queryKey: ["post"],
         queryFn: () => getPost(String(slug)),
@@ -18,10 +20,10 @@ export const PostDetail = ()=> {
     if (isPending || isLoading) return (
     <div className="preloader">
         <div></div>
-        <div>Loading Content!</div>
+        <div>Loading....</div>
     </div>
     )
-    if (isError) return <h1>Something went wrong :(</h1>
+    if (isError) return navigate("/login")
     return (
         <>
         <NarBar/>
