@@ -1,5 +1,5 @@
-import axios, { Axios, AxiosError } from "axios"
-import type { Posts, UserLogin, UserRegister } from "../types"
+import axios from "axios"
+import type { Comment, Posts, UserLogin, UserRegister } from "../types"
 
 export const BASE_API_ENDPOINT: string = "http://127.0.0.1:8000/api/"
 
@@ -59,9 +59,9 @@ export const updatePost = async (slug: string, data: Posts) => {
     }
 }
 
-export const getPost = async (slug: string) => {
+export const getPost = async (slug: string, count: number) => {
     try{
-        const response = await api.get(`posts/${slug}/`, {
+        const response = await api.get(`posts/${slug}/?comment_limits=${count}`, {
             headers: {
                 "Authorization": `Bearer ${localStorage.getItem("access")}`
             }
@@ -99,5 +99,15 @@ export const userLogin = async (data: UserLogin) => {
     }catch(error: unknown){
         //@ts-ignore
         throw new Error("........ ERROR ......")
+    }
+}
+
+export const CreateComment = async (slug: string, data: Comment) => {
+    
+    try{
+        const response = await api.post(`posts/${slug}/`, data)
+        return response.data
+    }catch(error){
+        throw new Error("error")
     }
 }
