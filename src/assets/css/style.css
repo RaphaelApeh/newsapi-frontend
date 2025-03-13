@@ -74,6 +74,13 @@ img {
   background-color: green;
 }
 
+.error {
+  font-size: 1.5rem;
+  color: red !important;
+  display: flex;
+  justify-content: center;
+}
+
 /* ====== Preloader ====== */
 .preloader {
   width: 100vw;

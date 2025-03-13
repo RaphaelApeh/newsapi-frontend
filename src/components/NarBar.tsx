@@ -35,7 +35,10 @@ const NarBar = () => {
             {isAuthenticated ? (
                 <Link to="/logout">Logout</Link>
             ): (
+                <>
                 <Link to="/login">Login</Link>
+                <Link to="/signup">Sign Up</Link>
+                </>
             )}
             </div>
         </div>

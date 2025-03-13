@@ -1,4 +1,4 @@
-import axios from "axios"
+import axios, { Axios, AxiosError } from "axios"
 import type { Posts, UserLogin, UserRegister } from "../types"
 
 export const BASE_API_ENDPOINT: string = "http://127.0.0.1:8000/api/"
@@ -79,9 +79,8 @@ export const registerUser = async (data: UserRegister) => {
         const response = await api.post("users/", data)
         console.log(response.status)
     
-    }catch(err){
-        console.log(err)
-        alert("Username or Email is taken.")
+    }catch(err: any){
+        throw new Error(err.status)
     }
 
 }

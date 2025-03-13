@@ -14,8 +14,7 @@ export const PostDetail = ()=> {
 
     const { data, isPending, isLoading, isError } = useQuery({
         queryKey: ["post"],
-        queryFn: () => getPost(String(slug)),
-        staleTime: 5000
+        queryFn: () => getPost(String(slug))
     })
     
     if (isPending || isLoading) return (
