@@ -37,3 +37,16 @@ export interface UserLogin {
     username: string
     password: string
 }
+
+enum STATUS {
+    ACTIVE = "active",
+    PENDING = "pending",
+    DRAFT = "draft"
+}
+
+export interface PostCreation {
+    title: string
+    content: string
+    status: STATUS
+    image: any
+}

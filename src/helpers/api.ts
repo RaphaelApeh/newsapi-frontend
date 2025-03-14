@@ -1,5 +1,5 @@
 import axios from "axios"
-import type { Comment, Posts, UserLogin, UserRegister } from "../types"
+import type { Comment, PostCreation, Posts, UserLogin, UserRegister } from "../types"
 
 export const BASE_API_ENDPOINT: string = "http://127.0.0.1:8000/api/"
 
@@ -31,7 +31,7 @@ export const getPosts = async (page: number) => {
     }
 }
 
-export const createPost = async (data: Posts) => {
+export const createPost = async (data: PostCreation) => {
     try{
         const response  = await api.post("posts/", data)
         return response.data
