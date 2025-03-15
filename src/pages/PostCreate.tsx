@@ -4,6 +4,7 @@ import { createPost } from '../helpers/api'
 import type { PostCreation } from '../types'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
+import NarBar from '../components/NarBar'
 
 export const PostCreate: React.FC = () => {
 
@@ -23,17 +24,18 @@ export const PostCreate: React.FC = () => {
     const { register, handleSubmit } = useForm<PostCreation>();
 
     const onSubmit = (data: PostCreation) => {
-        // const formData = new FormData()
-        // formData.append("title", data.title);
-        // formData.append("content", data.content);
-        // formData.append("status", data.status);
-        // formData.append("image", data.image[0]);
-        // console.log(formData);
+        const formData = new FormData()
+        formData.append("title", data.title);
+        formData.append("content", data.content);
+        formData.append("status", data.status);
+        formData.append("image", data.image[0]);
+        console.log(formData);
         //@ts-ignore
-        mutation.mutate({title: data.title, content: data.content, image: data.image[0], status: data.status})
+        mutation.mutate(formData)
     }
     return (
         <>
+        <NarBar />
         <h1>Create Post 😍</h1>
         {mutation.isError ? (
             <div className='alert alert-danger'>
