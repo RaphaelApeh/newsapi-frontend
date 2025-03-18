@@ -32,12 +32,7 @@ export const getPosts = async (page: number) => {
 }
 
 export const createPost = async (data: PostCreation) => {
-    try{
-        const response  = await api.post("posts/", data)
-        return response.data
-    }catch(error){
-        throw new Error("Error .....")
-    }
+    await api.post("posts/", data)
 }
 
 

@@ -28,7 +28,7 @@ export const PostCreate: React.FC = () => {
         formData.append("title", data.title);
         formData.append("content", data.content);
         formData.append("status", data.status);
-        formData.append("image", data.image[0]);
+        // formData.append("image", data.image[0]);
         console.log(formData);
         //@ts-ignore
         mutation.mutate(formData)
