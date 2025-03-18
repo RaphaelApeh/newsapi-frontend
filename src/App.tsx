@@ -18,7 +18,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/posts/:slug" element={<PostDetail/>} />
         <Route path="/posts/:slug/update" element={<PostUpdate />} />
-        <Route path="/posts/:slug/delete" element={<PostDelete/>} />
+        <Route path="/posts/:slug/delete" element={<PostDelete />} />
         <Route path="/signup" element={<SignUp/>} />
         <Route path="/login" element={<Login/>} />
         <Route path="/logout" element={<Logout/>} />
