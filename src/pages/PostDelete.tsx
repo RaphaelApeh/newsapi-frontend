@@ -1,37 +1,47 @@
 // import { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { deletePost, getPost } from '../helpers/api'
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { deletePost } from '../helpers/api'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import NarBar from '../components/NarBar'
+import Footer from '../components/Footer'
 
 export const PostDelete = () => {
     const { slug }  = useParams<string>()
 
     const navigate = useNavigate()
 
-    const { data, isError } = useQuery({
-        queryKey: ["delete-post"],
-        queryFn: () => getPost(String(slug), 0)
-    })
-    
+    const queryClient = useQueryClient()
     const mutation = useMutation({
         mutationFn: () => deletePost(String(slug)),
-        onSuccess: () => navigate("/")
+        onSuccess: () => {
+            queryClient.invalidateQueries({
+                queryKey: ["post"]
+            })
+            navigate("/")
+        }
     })
-    if (mutation.isError || isError){
-        navigate("/")
-    }
+    
     const handleOnDelete = () => {
         mutation.mutate()
     }
 
     return (
         <>
-        <h1 className='text-bold'>Are you sure you want to delete "{data.title}"?</h1>
-        {mutation.isPending ? (
-            <button className='btn btn-success'>Submitting</button>
-        ): (
-            <button onClick={handleOnDelete} className='btn btn-secondary'>Submit</button>
-        )}
+        <NarBar/>
+        {mutation.isError ? (
+            <div className='alert alert-danger'>
+                <small>{mutation.error?.message}</small>
+            </div>
+        ): ""}
+        <div className='mt-4'>
+            <h1 className='mt-4 mb-4 text-center'>Are you sure you want to delete this?</h1>
+            {mutation.isPending ? (
+                <button className='btn btn-success'>Submitting</button>
+            ): (
+                <button onClick={handleOnDelete} className='btn btn-secondary'>Submit</button>
+            )}
+        </div>
+        <Footer/>
         </>
     )
 }

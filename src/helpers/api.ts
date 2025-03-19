@@ -41,12 +41,7 @@ export const createPost = async (data: PostCreation) => {
 
 
 export const deletePost = async (slug: string) => {
-
-    try{
-        await api.delete(`posts/${slug}/`)
-    }catch(error){
-        throw new Error("Error ....")
-    }
+    await api.delete(`posts/${slug}/`)
 }
 
 

@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import NarBar from "../components/NarBar";
 import Footer from "../components/Footer";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -71,8 +71,8 @@ export const PostDetail = ()=> {
                         </p>
                         {data.can_edit_or_update ? (
                             <>
-                            <p className="delete">Delete</p>
-                            <p className="update">Update</p>
+                            <Link to={`/posts/${data.slug}/delete`} className="delete">Delete</Link>
+                            <Link to={`/posts/${data.slug}/update`} className="update">Update</Link>
                             </>
                         ): ""}
                     </div>
