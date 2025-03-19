@@ -28,7 +28,7 @@ export const PostCreate: React.FC = () => {
         formData.append("title", data.title);
         formData.append("content", data.content);
         formData.append("status", data.status);
-        // formData.append("image", data.image[0]);
+        formData.append("image", data.image[0]);
         console.log(formData);
         //@ts-ignore
         mutation.mutate(formData)
@@ -46,7 +46,7 @@ export const PostCreate: React.FC = () => {
             Sending ...
         </div>
         ): ""}
-        <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
+        <form onSubmit={handleSubmit(onSubmit)}>
             <input type="text" {...register("title")} className='mb-4 form-control' />
             <textarea className='mb-4 form-control' {...register("content")}></textarea>
             <select {...register("status")} className='mb-4 form-control' >

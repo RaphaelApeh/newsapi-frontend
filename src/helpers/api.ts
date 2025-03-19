@@ -32,7 +32,11 @@ export const getPosts = async (page: number) => {
 }
 
 export const createPost = async (data: PostCreation) => {
-    await api.post("posts/", data)
+    await api.post("posts/", data, {
+        headers: {
+            "Content-Type": "multipart/form-data",
+        }
+    })
 }
 
 
