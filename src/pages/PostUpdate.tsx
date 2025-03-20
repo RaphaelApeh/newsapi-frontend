@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { getPost } from '../helpers/api'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import NarBar from '../components/NarBar'
 import Footer from '../components/Footer'
 
@@ -12,7 +12,7 @@ export const PostUpdate: React.FC = () => {
     queryKey: ["updatepost"],
     queryFn: () => getPost(String(slug), 2)
   })
-  console.log(data)
+  
   if (isLoading) return (
     <div className="preloader">
         <div></div>
@@ -32,6 +32,7 @@ export const PostUpdate: React.FC = () => {
                 <option value="draft">Draft</option>
         </select> */}
         <input type="file" className='mt-4 form-control' />
+        <img src={data.image} width={5} />
           <button className='mt-4 btn btn-success'>Update</button>
       </form>
       <Footer/>
