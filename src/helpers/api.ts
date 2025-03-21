@@ -46,16 +46,16 @@ export const deletePost = async (slug: string) => {
 
 
 export const updatePost = async (slug: string, data: Posts) => {
-    try{
-        await api.put(`posts/${slug}/`, data)
-    }catch(error){
-        throw new Error("Error ......")
-    }
+    await api.put(`posts/${slug}/`, data, {
+        headers: {
+            "Content-Type": "multipart/form-data"
+        }
+    })
 }
 
-export const getPost = async (slug: string, count: number) => {
+export const getPost = async (slug: string, count: number | null = null) => {
     try{
-        const response = await api.get(`posts/${slug}/?comment_limits=${count}`, {
+        const response = await api.get(`posts/${slug}/?comment_limits=${count ? count : 0}`, {
             headers: {
                 "Authorization": `Bearer ${localStorage.getItem("access")}`
             }
