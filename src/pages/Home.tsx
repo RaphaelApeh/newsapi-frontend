@@ -12,7 +12,7 @@ import { useQuery } from "@tanstack/react-query";
 const Home = ()=> {
     //@ts-ignore    
     const [page, setPage] = useState(1)
-
+    const [search, setSearch] = useState<string>("")
 
     const { data, isLoading, isPending, isError } = useQuery(
         {
@@ -35,6 +35,10 @@ const Home = ()=> {
         <>
         <NarBar />
         <Header/>
+        <div className="mt-12">
+            <h5 className="mt-4 mb-4 text-center text-success">Search ......</h5>
+            <input type="search" onChange={(e) => setSearch(e.target.value)} value={search} placeholder="Search ..." className="mt-12 form-control" />
+        </div>
         <section>
         <div className="container">
             <h1 className="editor-h1">Editor Picks</h1>
