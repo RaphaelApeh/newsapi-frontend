@@ -5,6 +5,7 @@ import type { PostCreation } from '../types'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import NarBar from '../components/NarBar'
+import { STATUS } from '../helpers/data'
 
 export const PostCreate: React.FC = () => {
 
@@ -50,9 +51,9 @@ export const PostCreate: React.FC = () => {
             <input type="text" {...register("title")} className='mb-4 form-control' />
             <textarea className='mb-4 form-control' {...register("content")}></textarea>
             <select {...register("status")} className='mb-4 form-control' >
-                <option value="pending">Pending</option>
-                <option value="active">Active</option>
-                <option value="draft">Draft</option>
+                {STATUS.map((option) => {
+                    return <option key={option.id} value={option.name.toLowerCase()}>{option.name}</option>
+                })}
             </select>
             <input type="file" {...register("image")} className='mb-4 form-control' />
             {mutation.isPending ? (
