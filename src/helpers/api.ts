@@ -20,9 +20,9 @@ api.interceptors.request.use((config) => {
     }
 )
 
-export const getPosts = async (page: number) => {
+export const getPosts = async (page: number, search: string | null = null) => {
     try{
-        const response  = await api.get(`posts/?posts=${page}`);
+        const response  = await api.get(`posts/?posts=${page}&search${search ? `=${search}` : ""}`);
 
         return response.data.posts
     }catch(error){

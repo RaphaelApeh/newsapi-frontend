@@ -7,7 +7,7 @@ import NarBar from "../components/NarBar";
 import Post from "../components/Post";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 const Home = ()=> {
     //@ts-ignore    
@@ -17,7 +17,7 @@ const Home = ()=> {
     const { data, isLoading, isPending, isError } = useQuery(
         {
             queryKey: ["posts"],
-            queryFn: () => getPosts(page),
+            queryFn: () => getPosts(page, search),
             staleTime: 2000
         }
     )
@@ -28,6 +28,15 @@ const Home = ()=> {
             <div>Loading ....</div>
         </div>
     )
+    const queryClient = useQueryClient()
+    const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+        e.preventDefault()
+        setSearch(e.target.value)
+        queryClient.invalidateQueries({
+            queryKey: ["posts"]
+        })
+
+    }
 
     if (isError) return <h1>Something went wrong :(</h1>
 
@@ -37,7 +46,7 @@ const Home = ()=> {
         <Header/>
         <div className="mt-12">
             <h5 className="mt-4 mb-4 text-center text-success">Search ......</h5>
-            <input type="search" onChange={(e) => setSearch(e.target.value)} value={search} placeholder="Search ..." className="mt-12 form-control" />
+            <input type="search" onChange={handleSearch} value={search} placeholder="Search ..." className="mt-12 form-control" />
         </div>
         <section>
         <div className="container">
